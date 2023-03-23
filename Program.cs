@@ -3,7 +3,7 @@ const string TOO_FEW_ARGUMENTS = "Too few arguments";
 const string TOO_MANY_ARGUMENTS = "Too many arguments";
 const string INVALID_COMMAND = "Invalid command, must be \"build\" or \"analyze\"";
 const string INVALID_ARGUMENT_LENGTH = "{0} has wrong length, must contain {1} digits";
-const string INVALID_ARGUMENT = "{0} must only contain numbers";
+const string INVALID_ARGUMENT = "{0} must be a positive integer";
 const string INVALID_COUNTRY_CODE = "Wrong country code, we currently only support \"NO\"";
 const string INVALID_NATIONAL_DIGIT = "Wrong national check digit, we currently only support \"7\"";
 const string INVALID_IBAN_LENGTH = "Wrong length of IBAN";
@@ -25,10 +25,10 @@ const string INVALID_IBAN_LENGTH = "Wrong length of IBAN";
             else if (args.Length > 3) { PrintError(TOO_MANY_ARGUMENTS, ref inputIsValid); }
             else
             {
-                if (!int.TryParse(args[1], out _)) { PrintError(string.Format(INVALID_ARGUMENT, "Bank code"), ref inputIsValid); }
+                if (!uint.TryParse(args[1], out _)) { PrintError(string.Format(INVALID_ARGUMENT, "Bank code"), ref inputIsValid); }
                 if (args[1].Length != 4) { PrintError(string.Format(INVALID_ARGUMENT_LENGTH, "Bank code", 4), ref inputIsValid); }
 
-                if (!int.TryParse(args[2], out _)) { PrintError(string.Format(INVALID_ARGUMENT, "Account Number"), ref inputIsValid); }
+                if (!uint.TryParse(args[2], out _)) { PrintError(string.Format(INVALID_ARGUMENT, "Account Number"), ref inputIsValid); }
                 if (args[2].Length != 6) { PrintError(string.Format(INVALID_ARGUMENT_LENGTH, "Accout Number", 6), ref inputIsValid); }
             }
         }
